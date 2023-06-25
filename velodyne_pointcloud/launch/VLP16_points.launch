@@ -2,13 +2,16 @@
 <!-- run velodyne_pointcloud/TransformNodelet in a nodelet manager for a VLP-16 -->
 
 <launch>
+  <node pkg="tf" type="static_transform_publisher" name="base_footprint2base_link" args="0 0 0 0 0 0 base_footprint base_link 10" />
+  <node pkg="tf" type="static_transform_publisher" name="lidar2base_publisher" args="0 0 0 -1.5708 0 0 base_link velodyne 10" />
+  <node pkg="tf" type="static_transform_publisher" name="imu2base_publisher" args="0 0 0 0 0 0 base_link imu_link 10" />
 
   <!-- declare arguments with default values -->
   <arg name="calibration" default="$(find velodyne_pointcloud)/params/VLP16db.yaml"/>
   <arg name="device_ip" default="" />
   <arg name="frame_id" default="velodyne" />
   <arg name="manager" default="$(arg frame_id)_nodelet_manager" />
-  <arg name="max_range" default="130.0" />
+  <arg name="max_range" default="20.0" />
   <arg name="min_range" default="0.4" />
   <arg name="pcap" default="" />
   <arg name="port" default="2368" />
